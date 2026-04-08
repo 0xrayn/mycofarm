@@ -16,7 +16,7 @@ const COLLAGE = [
   },
   {
     col: 1, rows: [
-      { src: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=400&q=80&fit=crop", alt: "Masakan jamur", h: "h-36" },
+      { src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80&fit=crop", alt: "Masakan jamur", h: "h-36" },
       { src: "https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?w=400&q=80&fit=crop", alt: "Jamur segar", h: "h-56" },
     ],
   },

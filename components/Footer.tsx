@@ -79,7 +79,7 @@ export default function Footer() {
             <p className="mt-1">Jl. Sumber Sari No. 88, Lowokwaru, Malang, Jawa Timur 65145</p>
           </div>
           <div className="text-center">
-            <p>Dibuat dengan ❤️ oleh{" "}
+            <p>Dibuat oleh{" "}
               <a href="https://rayn.web.id" target="_blank" rel="noreferrer" className="text-success/70 hover:text-success transition-colors font-medium underline underline-offset-2">
                 rayn.web.id
               </a>
