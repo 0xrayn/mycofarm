@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "daisyui";
 
 @plugin "daisyui" {
   themes: forest --default, black, luxury, night, lemonade;
@@ -55,13 +54,10 @@ h1, h2, h3 {
   0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
   100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
 }
-@keyframes spinSlow {
-  to { transform: rotate(360deg); }
-}
 
 /* ===== UTILITY CLASSES ===== */
 .shimmer-text {
-  background: linear-gradient(90deg, oklch(var(--su)) 0%, #c9a84c 40%, oklch(var(--su)) 80%);
+  background: linear-gradient(90deg, #4ade80 0%, #c9a84c 40%, #4ade80 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -72,14 +68,6 @@ h1, h2, h3 {
 .fancy-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-}
-
-.section-eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  opacity: 0.6;
 }
 
 /* ===== SCROLL REVEAL ===== */
