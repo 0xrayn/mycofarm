@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import WAFloat from "@/components/WAFloat";
+import Cursor from "@/components/Cursor";
 
 export const metadata: Metadata = {
   title: "MycoFarm — Jamur Tiram Premium Malang",
@@ -17,7 +21,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {children}
+        <Cursor />
+        <WAFloat />
+        <Navbar />
+        {/* pt-[72px] fixes the mobile space below fixed navbar */}
+        <main className="pt-[72px]">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

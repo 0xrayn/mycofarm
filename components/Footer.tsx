@@ -1,8 +1,24 @@
+import Link from "next/link";
+
 const WA_NUM = "6281234567890";
 
-const NAV_LINKS = ["Beranda", "Tentang Kami", "Produk", "Proses Budidaya", "Galeri", "Kontak"];
-const NAV_HREFS = ["#beranda", "#tentang", "#produk", "#budidaya", "#galeri", "#kontak"];
-const PRODUCTS = ["Jamur Tiram Putih", "Jamur Tiram Kuning", "Jamur Tiram Pink", "Baglog Siap Panen", "Starter Kit", "Produk Olahan"];
+const NAV_LINKS = [
+  { label: "Beranda", href: "/" },
+  { label: "Tentang Kami", href: "/tentang" },
+  { label: "Produk", href: "/produk" },
+  { label: "Proses Budidaya", href: "/proses-budidaya" },
+  { label: "Galeri", href: "/galeri" },
+  { label: "Kontak", href: "/kontak" },
+];
+
+const PRODUCTS = [
+  { label: "Jamur Tiram Putih", href: "/produk/jamur-tiram-putih" },
+  { label: "Jamur Tiram Kuning", href: "/produk/jamur-tiram-kuning" },
+  { label: "Jamur Tiram Pink", href: "/produk/jamur-tiram-pink" },
+  { label: "Baglog Siap Panen", href: "/produk/baglog-siap-panen" },
+  { label: "Starter Kit", href: "/produk/starter-kit" },
+  { label: "Produk Olahan", href: "/produk/olahan" },
+];
 
 export default function Footer() {
   return (
@@ -38,8 +54,8 @@ export default function Footer() {
           <div>
             <div className="text-xs font-bold tracking-widest uppercase opacity-40 mb-4">Navigasi</div>
             <ul className="space-y-2.5 text-sm opacity-60">
-              {NAV_LINKS.map((l, i) => (
-                <li key={l}><a href={NAV_HREFS[i]} className="hover:opacity-100 hover:text-success transition-all">{l}</a></li>
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}><Link href={l.href} className="hover:opacity-100 hover:text-success transition-all">{l.label}</Link></li>
               ))}
             </ul>
           </div>
@@ -49,7 +65,7 @@ export default function Footer() {
             <div className="text-xs font-bold tracking-widest uppercase opacity-40 mb-4">Produk</div>
             <ul className="space-y-2.5 text-sm opacity-60">
               {PRODUCTS.map((p) => (
-                <li key={p}><a href="#produk" className="hover:opacity-100 transition-all">{p}</a></li>
+                <li key={p.href}><Link href={p.href} className="hover:opacity-100 hover:text-success transition-all">{p.label}</Link></li>
               ))}
             </ul>
           </div>

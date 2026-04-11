@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const WA_NUM = "6281234567890";
 
@@ -13,12 +14,12 @@ const THEMES = [
 ];
 
 const NAV_LINKS = [
-  { href: "#beranda", label: "Beranda" },
-  { href: "#tentang", label: "Tentang" },
-  { href: "#produk", label: "Produk" },
-  { href: "#budidaya", label: "Budidaya" },
-  { href: "#galeri", label: "Galeri" },
-  { href: "#kontak", label: "Kontak" },
+  { href: "/", label: "Beranda" },
+  { href: "/tentang", label: "Tentang Kami" },
+  { href: "/produk", label: "Produk" },
+  { href: "/proses-budidaya", label: "Proses Budidaya" },
+  { href: "/galeri", label: "Galeri" },
+  { href: "/kontak", label: "Kontak" },
 ];
 
 const WaIcon = () => (
@@ -28,6 +29,7 @@ const WaIcon = () => (
 );
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
@@ -83,13 +85,21 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-8 text-white/80">
-          {NAV_LINKS.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="relative font-medium text-sm hover:text-white transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1.5px] after:bg-success after:transition-all after:duration-300 hover:after:w-full">
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((l) => {
+            const isActive = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={`relative font-medium text-sm transition-colors duration-300 after:absolute after:bottom-[-4px] after:left-0 after:h-[1.5px] after:bg-success after:transition-all after:duration-300 hover:text-white hover:after:w-full ${
+                    isActive ? "text-white after:w-full" : "after:w-0"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right side */}
@@ -157,30 +167,39 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-black/90 backdrop-blur-xl border-t border-white/10">
-          <div className="px-6 py-4 space-y-1">
-            {NAV_LINKS.map((l) => (
-              <a
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        } bg-black/90 backdrop-blur-xl border-t border-white/10`}
+      >
+        <div className="px-6 py-4 space-y-1">
+          {NAV_LINKS.map((l) => {
+            const isActive = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+            return (
+              <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setMobileOpen(false)}
-                className="block py-3 text-white/80 border-b border-white/5 hover:text-white transition-colors"
+                className={`flex items-center gap-2 py-3 border-b border-white/5 transition-colors text-sm font-medium ${
+                  isActive ? "text-green-400" : "text-white/80 hover:text-white"
+                }`}
               >
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0" />}
                 {l.label}
-              </a>
-            ))}
-            <a
-              href={`https://wa.me/${WA_NUM}`}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-xl font-semibold"
-            >
-              Pesan via WhatsApp
-            </a>
-          </div>
+              </Link>
+            );
+          })}
+          <a
+            href={`https://wa.me/${WA_NUM}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 flex items-center justify-center gap-2 bg-green-500 text-white py-3 rounded-xl font-semibold"
+          >
+            <WaIcon />
+            Pesan via WhatsApp
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

@@ -15,25 +15,23 @@ export default function Hero() {
     const W = window.innerWidth;
     const H = window.innerHeight;
     const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
     renderer.setSize(W, H);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); // cap at 1.5 instead of 2 — saves ~30% GPU
     camera.position.set(0, 0, 6);
 
-    // Particle field
-    const pCount = 350;
+    // Particle field — reduced count on mobile
+    const isMobile = W < 768;
+    const pCount = isMobile ? 150 : 350;
     const pGeo = new THREE.BufferGeometry();
     const pPos = new Float32Array(pCount * 3);
     for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 22;
     pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-    scene.add(
-      new THREE.Points(
-        pGeo,
-        new THREE.PointsMaterial({ size: 0.055, color: 0x4ade80, transparent: true, opacity: 0.65 })
-      )
-    );
+    const pMat = new THREE.PointsMaterial({ size: 0.055, color: 0x4ade80, transparent: true, opacity: 0.65 });
+    const particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
 
-    // Wireframe shapes
+    // Wireframe shapes — track all for disposal
     const shapes: { mesh: THREE.Mesh; rx: number; ry: number }[] = [];
     const geos: THREE.BufferGeometry[] = [
       new THREE.TorusGeometry(0.7, 0.04, 10, 32),
@@ -42,30 +40,23 @@ export default function Hero() {
       new THREE.OctahedronGeometry(0.45, 0),
       new THREE.TorusKnotGeometry(0.35, 0.08, 64, 8),
     ];
+    const mats: THREE.Material[] = [];
     const colors = [0x22c55e, 0x4ade80, 0x86efac, 0x16a34a, 0xa3e635];
     geos.forEach((g, i) => {
-      const mat = new THREE.MeshBasicMaterial({
-        color: colors[i],
-        wireframe: true,
-        transparent: true,
-        opacity: 0.18 + i * 0.04,
-      });
+      const mat = new THREE.MeshBasicMaterial({ color: colors[i], wireframe: true, transparent: true, opacity: 0.18 + i * 0.04 });
+      mats.push(mat);
       const mesh = new THREE.Mesh(g, mat);
-      mesh.position.set(
-        (Math.random() - 0.5) * 9,
-        (Math.random() - 0.5) * 7,
-        (Math.random() - 0.5) * 4
-      );
+      mesh.position.set((Math.random() - 0.5) * 9, (Math.random() - 0.5) * 7, (Math.random() - 0.5) * 4);
       mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
       shapes.push({ mesh, rx: 0.003 + Math.random() * 0.005, ry: 0.002 + Math.random() * 0.004 });
       scene.add(mesh);
     });
 
     // Central torus ring
-    const bigTorus = new THREE.Mesh(
-      new THREE.TorusGeometry(3, 0.018, 6, 100),
-      new THREE.MeshBasicMaterial({ color: 0x22c55e, transparent: true, opacity: 0.05 })
-    );
+    const bigTorusGeo = new THREE.TorusGeometry(3, 0.018, 6, 100);
+    const bigTorusMat = new THREE.MeshBasicMaterial({ color: 0x22c55e, transparent: true, opacity: 0.05 });
+    mats.push(bigTorusMat);
+    const bigTorus = new THREE.Mesh(bigTorusGeo, bigTorusMat);
     bigTorus.rotation.x = Math.PI / 4;
     scene.add(bigTorus);
 
@@ -77,9 +68,15 @@ export default function Hero() {
     };
     document.addEventListener("mousemove", onMove);
 
+    // Pause animation when tab is hidden (saves CPU/GPU)
     let t = 0;
     let rafId: number;
+    let paused = false;
+    const onVisibility = () => { paused = document.hidden; if (!paused) animate(); };
+    document.addEventListener("visibilitychange", onVisibility);
+
     const animate = () => {
+      if (paused) return;
       rafId = requestAnimationFrame(animate);
       t += 0.008;
       camera.position.x += (mx2 * 0.8 - camera.position.x) * 0.04;
@@ -102,13 +99,28 @@ export default function Hero() {
     };
     window.addEventListener("resize", onResize);
 
+    // Cleanup: dispose ALL GPU resources to prevent memory leaks
     return () => {
       cancelAnimationFrame(rafId);
       document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", onResize);
+
+      // Dispose geometries
+      pGeo.dispose();
+      bigTorusGeo.dispose();
+      geos.forEach((g) => g.dispose());
+
+      // Dispose materials
+      pMat.dispose();
+      mats.forEach((m) => m.dispose());
+
+      // Dispose renderer (releases WebGL context)
       renderer.dispose();
+      renderer.forceContextLoss();
     };
   }, []);
+
 
   return (
     <section id="beranda" className="relative min-h-screen overflow-hidden flex items-center">
@@ -125,7 +137,7 @@ export default function Hero() {
         style={{ animation: "morphBlob 14s 3s ease-in-out infinite" }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-12 lg:pt-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[85vh]">
 
           {/* Left content */}
