@@ -21,6 +21,9 @@ html {
 body {
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
+  /* Use theme base color so background adapts properly */
+  background-color: oklch(var(--b1));
+  color: oklch(var(--bc));
 }
 
 h1, h2, h3 {
@@ -67,6 +70,15 @@ h1, h2, h3 {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 4s linear infinite;
+  /* Ensure shimmer only applies to THIS element, not children */
+  display: inline-block;
+}
+
+/* Prevent shimmer from affecting child elements */
+.shimmer-text * {
+  -webkit-text-fill-color: initial;
+  background: none;
+  background-clip: initial;
 }
 
 .fancy-divider {
@@ -88,3 +100,10 @@ h1, h2, h3 {
 .reveal-right.visible { opacity: 1; transform: none; }
 .reveal-scale         { opacity: 0; transform: scale(0.9); transition: opacity .8s cubic-bezier(0.16,1,0.3,1), transform .8s cubic-bezier(0.16,1,0.3,1); }
 .reveal-scale.visible { opacity: 1; transform: none; }
+
+/* ===== RESPONSIVE HELPERS ===== */
+@media (max-width: 640px) {
+  .shimmer-text {
+    background-size: 300% auto;
+  }
+}
