@@ -160,7 +160,78 @@ function UploadModal({ onClose, onUploaded }: { onClose: () => void; onUploaded:
   );
 }
 
-function GalleryCard({ item, cls, h, onOpen }: { item: GalleryItem; cls: string; h: string; onOpen: () => void }) {
+function DeleteModal({ item, onClose, onDeleted }: { item: GalleryItem; onClose: () => void; onDeleted: () => void }) {
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose]);
+
+  const handleDelete = async () => {
+    if (!password.trim()) { setError("Masukkan password terlebih dahulu"); return; }
+    setLoading(true); setError("");
+    try {
+      const res = await fetch("/api/gallery", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: item.id, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Gagal menghapus foto");
+      onDeleted();
+      onClose();
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-base-200 border border-white/10 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+          <div>
+            <h2 className="font-bold text-lg" style={{ fontFamily: "'Cormorant Garamond', serif" }}>🗑️ Hapus Foto</h2>
+            <p className="text-xs opacity-50 mt-0.5 truncate max-w-[200px]">{item.label}</p>
+          </div>
+          <button onClick={onClose} className="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-sm">✕</button>
+        </div>
+        <div className="p-6 space-y-4">
+          <p className="text-sm opacity-60">Masukkan password admin untuk menghapus foto ini secara permanen.</p>
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-widest opacity-50 mb-2">Password Admin</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") handleDelete(); }}
+              placeholder="Masukkan password..."
+              autoFocus
+              className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-red-500/60 transition-colors"
+            />
+          </div>
+          {error && <div className="text-red-400 text-sm bg-red-500/10 rounded-xl px-4 py-3">{error}</div>}
+          <div className="flex gap-3">
+            <button onClick={onClose} className="flex-1 border border-white/15 hover:bg-white/10 text-sm font-medium py-3 rounded-xl transition-all">
+              Batal
+            </button>
+            <button onClick={handleDelete} disabled={loading}
+              className="flex-1 bg-red-500 hover:bg-red-400 disabled:opacity-50 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+              {loading ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Menghapus...</> : "Hapus Foto"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GalleryCard({ item, cls, h, onOpen, onDelete }: { item: GalleryItem; cls: string; h: string; onOpen: () => void; onDelete?: () => void }) {
   const [imgError, setImgError] = useState(false);
   return (
     <div className={`relative rounded-3xl overflow-hidden cursor-pointer group ${cls} ${h}`} onClick={onOpen}>
@@ -178,8 +249,19 @@ function GalleryCard({ item, cls, h, onOpen }: { item: GalleryItem; cls: string;
             <span className="text-white font-bold text-base block drop-shadow">{item.label}</span>
             {item.sub && <span className="text-white/75 text-xs block">{item.sub}</span>}
           </div>
-          <div className="absolute top-3 right-3 w-8 h-8 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <svg width="14" height="14" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+          <div className="absolute top-3 right-3 flex gap-2">
+            {onDelete && (
+              <button
+                onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                className="w-8 h-8 bg-red-500/80 hover:bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                title="Hapus foto"
+              >
+                <svg width="13" height="13" fill="none" stroke="white" strokeWidth="2.5" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" /></svg>
+              </button>
+            )}
+            <div className="w-8 h-8 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <svg width="14" height="14" fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+            </div>
           </div>
         </>
       )}
@@ -191,6 +273,7 @@ export default function Gallery() {
   const [uploadedItems, setUploadedItems] = useState<GalleryItem[]>([]);
   const [lightboxItem, setLightboxItem] = useState<GalleryItem | null>(null);
   const [showUpload, setShowUpload] = useState(false);
+  const [deleteItem, setDeleteItem] = useState<GalleryItem | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -233,7 +316,7 @@ export default function Gallery() {
         {uploadedItems.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             {uploadedWithLayout.map((item) => (
-              <GalleryCard key={item.id} item={item} cls="" h="h-56" onOpen={() => setLightboxItem(item)} />
+              <GalleryCard key={item.id} item={item} cls="" h="h-56" onOpen={() => setLightboxItem(item)} onDelete={() => setDeleteItem(item)} />
             ))}
           </div>
         )}
@@ -257,6 +340,13 @@ export default function Gallery() {
 
       {lightboxItem && <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />}
       {showUpload && <UploadModal onClose={() => setShowUpload(false)} onUploaded={handleUploaded} />}
+      {deleteItem && (
+        <DeleteModal
+          item={deleteItem}
+          onClose={() => setDeleteItem(null)}
+          onDeleted={() => setUploadedItems((prev) => prev.filter((i) => i.id !== deleteItem.id))}
+        />
+      )}
     </section>
   );
 }
