@@ -211,8 +211,6 @@ export default function Gallery() {
     h: "h-56",
   }));
 
-  const allItems = [...uploadedWithLayout, ...STATIC_GALLERY];
-
   return (
     <section id="galeri" className="py-28">
       <div className="max-w-7xl mx-auto px-6">
@@ -231,8 +229,18 @@ export default function Gallery() {
           </button>
         </div>
 
+        {/* Foto yang diupload admin — grid seragam 3 kolom */}
+        {uploadedItems.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            {uploadedWithLayout.map((item) => (
+              <GalleryCard key={item.id} item={item} cls="" h="h-56" onOpen={() => setLightboxItem(item)} />
+            ))}
+          </div>
+        )}
+
+        {/* Foto default — grid masonry dengan ukuran bervariasi */}
         <div className="grid grid-cols-12 gap-4">
-          {allItems.map((item) => (
+          {STATIC_GALLERY.map((item) => (
             <GalleryCard key={item.id} item={item} cls={item.cls || "col-span-12 lg:col-span-4"} h={item.h || "h-56"} onOpen={() => setLightboxItem(item)} />
           ))}
         </div>

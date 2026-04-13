@@ -1,146 +1,155 @@
 # 🍄 MycoFarm
 
-Website profil & toko online untuk usaha budidaya jamur tiram premium di Malang.
-Dibangun dengan **Next.js 15**, **Tailwind CSS**, dan **DaisyUI**.
+Profile website and online store for a premium oyster mushroom farm based in Malang, Indonesia.
+Built with **Next.js 15**, **Tailwind CSS**, and **DaisyUI**.
 
 ---
 
 ## 📸 Screenshots
 
 ### Navbar & Hero
+Clean navigation bar with an interactive Three.js animated background, headline, and WhatsApp CTA button.
 ![Navbar Hero](screenshots/navbar%20hero.png)
 
-### Produk
-![Produk](screenshots/produk.png)
+### Products
+Full product catalog covering fresh oyster mushrooms (white, yellow, pink), baglogs, starter kits, and processed goods like mushroom chips and floss.
+![Products](screenshots/produk.png)
 
-### Tentang MycoFarm
-![Tentang MycoFarm](screenshots/tentangmycofarm.png)
+### About MycoFarm
+Farm profile section with a staggered image collage, key highlights, and a brief story about the brand since 2019.
+![About MycoFarm](screenshots/tentangmycofarm.png)
 
-### Galeri
-![Galeri](screenshots/gallery.png)
+### Gallery
+Dynamic masonry photo grid with lightbox support. Admin can upload new photos directly from the UI.
+![Gallery](screenshots/gallery.png)
 
-### Hubungi Kami
-![Hubungi Kami](screenshots/hubungikami.png)
+### Contact
+Contact form and floating WhatsApp button for quick order inquiries.
+![Contact](screenshots/hubungikami.png)
 
 ---
 
-## 🚀 Fitur
+## 🚀 Features
 
-- **Hero** — Animasi Three.js interaktif dengan partikel dan floating shapes
-- **Produk** — Katalog jamur segar, baglog, starter kit, dan produk olahan
-- **Galeri** — Grid foto dinamis dengan lightbox & fitur upload foto (admin)
-- **Tentang** — Profil usaha dengan collage gambar
-- **Proses Budidaya** — Langkah-langkah budidaya jamur tiram
-- **Kontak** — Form kontak + integrasi WhatsApp
-- **Dark mode** — Otomatis mengikuti preferensi sistem
-- **Fully responsive** — Mobile-first design
+- **Hero** - Interactive Three.js background with animated particles and floating shapes
+- **Products** - Catalog of fresh mushrooms, baglogs, starter kits, and processed goods
+- **Gallery** - Dynamic photo grid with lightbox and admin photo upload
+- **About** - Farm profile with staggered image collage
+- **Cultivation Process** - Step-by-step oyster mushroom growing guide
+- **Contact** - Contact form with WhatsApp integration
+- **Dark mode** - Follows system preference automatically
+- **Fully responsive** - Mobile-first design
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Teknologi |
+| Layer | Technology |
 |---|---|
 | Framework | Next.js 15 (App Router) |
 | Styling | Tailwind CSS + DaisyUI |
-| Animasi | Three.js (hero background) |
+| Animation | Three.js (hero background) |
 | Font | Cormorant Garamond (serif display) |
 | Deploy | Vercel |
 
 ---
 
-## ⚙️ Instalasi & Menjalankan
+## ⚙️ Installation
 
 ```bash
-# 1. Clone atau ekstrak project
+# 1. Navigate to the project folder
 cd mycofarm
 
 # 2. Install dependencies
 npm install
 
-# 3. Buat file environment (opsional)
+# 3. Create environment file (optional)
 cp .env.example .env.local
-# Edit GALLERY_PASSWORD di .env.local
+# Set GALLERY_PASSWORD in .env.local
 
-# 4. Jalankan development server
+# 4. Start the development server
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000) di browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
 ## 🔐 Environment Variables
 
-Buat file `.env.local` di root project:
+Create a `.env.local` file in the project root:
 
 ```env
-# Password untuk upload foto ke galeri
-# Jika tidak diset, default: mycofarm2024
-GALLERY_PASSWORD=passwordkamu
+# Password for gallery photo uploads
+# Falls back to "mycofarm2024" if not set
+GALLERY_PASSWORD=yourpassword
 ```
 
 ---
 
-## 📁 Struktur Project
+## 📁 Project Structure
 
 ```
 mycofarm/
 ├── app/
-│   ├── api/gallery/        # API upload & fetch foto galeri
-│   ├── produk/             # Halaman detail produk
+│   ├── api/gallery/        # Gallery upload and fetch API
+│   ├── produk/             # Product detail pages
 │   │   ├── jamur-tiram-putih/
 │   │   ├── jamur-tiram-kuning/
 │   │   ├── jamur-tiram-pink/
 │   │   ├── baglog-siap-panen/
 │   │   ├── starter-kit/
 │   │   └── olahan/
-│   ├── galeri/             # Halaman galeri penuh
-│   ├── tentang/            # Halaman tentang
-│   ├── kontak/             # Halaman kontak
-│   └── proses-budidaya/    # Halaman proses budidaya
+│   ├── galeri/             # Full gallery page
+│   ├── tentang/            # About page
+│   ├── kontak/             # Contact page
+│   └── proses-budidaya/    # Cultivation process page
 ├── components/
-│   ├── Hero.tsx            # Section hero dengan Three.js
-│   ├── Products.tsx        # Katalog produk
-│   ├── Gallery.tsx         # Galeri foto + upload
-│   ├── About.tsx           # Tentang kami
-│   ├── Budidaya.tsx        # Proses budidaya
-│   ├── Nutrition.tsx       # Info nutrisi jamur
-│   ├── HealthBenefits.tsx  # Manfaat kesehatan
-│   ├── Testimonials.tsx    # Testimoni pelanggan
-│   ├── Stats.tsx           # Statistik usaha
-│   ├── Contact.tsx         # Form kontak
-│   ├── Navbar.tsx          # Navigasi
+│   ├── Hero.tsx            # Hero section with Three.js
+│   ├── Products.tsx        # Product catalog
+│   ├── Gallery.tsx         # Photo gallery with upload
+│   ├── About.tsx           # About section
+│   ├── Budidaya.tsx        # Cultivation process
+│   ├── Nutrition.tsx       # Mushroom nutrition info
+│   ├── HealthBenefits.tsx  # Health benefits section
+│   ├── Testimonials.tsx    # Customer testimonials
+│   ├── Stats.tsx           # Business statistics
+│   ├── Contact.tsx         # Contact form
+│   ├── Navbar.tsx          # Navigation bar
 │   ├── Footer.tsx          # Footer
-│   ├── WAFloat.tsx         # Tombol WhatsApp floating
+│   ├── WAFloat.tsx         # Floating WhatsApp button
 │   └── Cursor.tsx          # Custom cursor
 └── public/
-    └── images/             # Foto produk & konten lokal
+    └── images/             # Local product and content images
 ```
 
 ---
 
-## 📷 Galeri Admin
+## 📷 Gallery Admin
 
-Fitur upload foto tersedia di halaman Galeri. Klik tombol **"Upload Foto"** dan masukkan password admin.
+The photo upload feature is available on the Gallery section. Click the **"Upload Foto"** button and enter the admin password.
 
-- Format yang didukung: JPG, PNG, WebP
-- Ukuran maksimal: 5MB per foto
-- Foto tersimpan di `public/uploads/gallery/`
-- Metadata tersimpan di `public/gallery-data.json`
+- Supported formats: JPG, PNG, WebP
+- Maximum file size: 5MB per photo
+- Uploaded files are saved to `public/uploads/gallery/`
+- Metadata is stored in `public/gallery-data.json`
 
 ---
 
-## 📞 Kontak
+## 📞 Contact
 
-Nomor WhatsApp dapat diganti di konstanta `WA_NUM` di setiap komponen:
+The WhatsApp number can be changed via the `WA_NUM` constant in each component:
 
 ```ts
-const WA_NUM = "6281234567890"; // ganti dengan nomor aktif
+const WA_NUM = "6281234567890"; // replace with active number
 ```
 
 ---
 
 ## 📄 License
 
-© 2024 MycoFarm. All rights reserved.
+© 2026 MycoFarm. All rights reserved.
+
+---
+
+Built by rayn [->](https://rayn.web.id)
