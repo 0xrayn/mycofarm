@@ -2,16 +2,16 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const STATIC_GALLERY = [
-  { id: "s1", src: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=900&q=85&fit=crop", label: "🍄 Jamur Tiram Segar Panen Pagi", sub: "Dipetik langsung dari kumbung organik kami", cls: "col-span-12 lg:col-span-7", h: "h-72 lg:h-[420px]" },
-  { id: "s2", src: "https://images.unsplash.com/photo-1611069955545-12ab11e75e99?w=700&q=80&fit=crop", label: "🏡 Kumbung Jamur", sub: "Kapasitas 10.000 baglog", cls: "col-span-12 lg:col-span-5", h: "h-48 lg:h-[420px]" },
-  { id: "s3", src: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&q=80&fit=crop", label: "🌿 Proses Inkubasi", sub: "Suhu & kelembaban terkontrol", cls: "col-span-12 lg:col-span-4", h: "h-56" },
-  { id: "s4", src: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&q=80&fit=crop", label: "🌾 Baglog Produktif", sub: "Media tanam premium berkualitas", cls: "col-span-12 lg:col-span-4", h: "h-56" },
-  { id: "s5", src: "https://images.unsplash.com/photo-1543353071-087092ec393a?w=600&q=80&fit=crop", label: "🌈 Varietas Tiram", sub: "Putih, Kuning, Pink", cls: "col-span-12 lg:col-span-4", h: "h-56" },
-  { id: "s6", src: "https://images.unsplash.com/photo-1576501756374-e84f64ead28e?w=500&q=80&fit=crop", label: "📦 Packaging Higienis", sub: "Segar sampai tujuan", cls: "col-span-12 lg:col-span-3", h: "h-52" },
-  { id: "s7", src: "https://images.unsplash.com/photo-1528750997573-59b89d56f4f7?w=700&q=80&fit=crop", label: "⚗️ Sterilisasi Baglog", sub: "Standar HACCP", cls: "col-span-12 lg:col-span-5", h: "h-52" },
-  { id: "s8", src: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=600&q=80&fit=crop", label: "🔍 Tekstur Premium", sub: "Detail kualitas grade A", cls: "col-span-12 lg:col-span-4", h: "h-52" },
-  { id: "s9", src: "https://images.unsplash.com/photo-1609501676725-7186f017a4b9?w=700&q=80&fit=crop", label: "📦 Paket Siap Kirim", sub: "Pengiriman ke seluruh Jawa Timur", cls: "col-span-12 lg:col-span-6", h: "h-56" },
-  { id: "s10", src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80&fit=crop", label: "🍳 Olahan Lezat", sub: "Kaya nutrisi, rendah kalori", cls: "col-span-12 lg:col-span-6", h: "h-56" },
+  { id: "s1", src: "/images/atas.png",          label: "🍄 Jamur Tiram Segar Panen Pagi", sub: "Dipetik langsung dari kumbung organik kami", cls: "col-span-12 lg:col-span-7", h: "h-72 lg:h-[420px]" },
+  { id: "s2", src: "/images/atas2.png",         label: "🏡 Kumbung Jamur",               sub: "Kapasitas 10.000 baglog",                   cls: "col-span-12 lg:col-span-5", h: "h-48 lg:h-[420px]" },
+  { id: "s3", src: "/images/baglog.png",        label: "🌿 Proses Inkubasi",             sub: "Suhu & kelembaban terkontrol",              cls: "col-span-12 lg:col-span-4", h: "h-56" },
+  { id: "s4", src: "/images/baglogfresh.png",   label: "🌾 Baglog Produktif",            sub: "Media tanam premium berkualitas",           cls: "col-span-12 lg:col-span-4", h: "h-56" },
+  { id: "s5", src: "/images/atas4.png",         label: "🌈 Varietas Tiram",              sub: "Putih, Kuning, Pink",                       cls: "col-span-12 lg:col-span-4", h: "h-56" },
+  { id: "s6", src: "/images/staterpack.png",    label: "📦 Packaging Higienis",          sub: "Segar sampai tujuan",                       cls: "col-span-12 lg:col-span-3", h: "h-52" },
+  { id: "s7", src: "/images/atas5.png",         label: "⚗️ Sterilisasi Baglog",          sub: "Standar HACCP",                             cls: "col-span-12 lg:col-span-5", h: "h-52" },
+  { id: "s8", src: "/images/jamurtiramputih.png", label: "🔍 Tekstur Premium",           sub: "Detail kualitas grade A",                   cls: "col-span-12 lg:col-span-4", h: "h-52" },
+  { id: "s9", src: "/images/atas6.png",         label: "📦 Paket Siap Kirim",            sub: "Pengiriman ke seluruh Jawa Timur",          cls: "col-span-12 lg:col-span-6", h: "h-56" },
+  { id: "s10", src: "/images/keripikjamur.png", label: "🍳 Olahan Lezat",               sub: "Kaya nutrisi, rendah kalori",               cls: "col-span-12 lg:col-span-6", h: "h-56" },
 ];
 
 interface GalleryItem { id: string; src: string; label: string; sub: string; cls?: string; h?: string; }
@@ -53,6 +53,16 @@ function UploadModal({ onClose, onUploaded }: { onClose: () => void; onUploaded:
     setFile(f);
     if (f) setPreview(URL.createObjectURL(f));
     else setPreview(null);
+  };
+
+  const handlePasswordKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") { setStep("upload"); setError(""); }
+  };
+
+  const handlePasswordContinue = () => {
+    if (!password.trim()) { setError("Masukkan password terlebih dahulu"); return; }
+    setStep("upload");
+    setError("");
   };
 
   useEffect(() => {
@@ -106,11 +116,11 @@ function UploadModal({ onClose, onUploaded }: { onClose: () => void; onUploaded:
             <>
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-widest opacity-50 mb-2">Password Admin</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && (setStep("upload"), setError(""))} placeholder="Masukkan password..." autoFocus
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={handlePasswordKeyDown} placeholder="Masukkan password..." autoFocus
                   className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-green-500/60 transition-colors" />
               </div>
               {error && <div className="text-red-400 text-sm bg-red-500/10 rounded-xl px-4 py-3">{error}</div>}
-              <button onClick={() => { if (!password.trim()) { setError("Masukkan password terlebih dahulu"); return; } setStep("upload"); setError(""); }}
+              <button onClick={handlePasswordContinue}
                 className="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-3 rounded-xl transition-all">
                 Lanjutkan →
               </button>

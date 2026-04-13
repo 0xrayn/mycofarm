@@ -17,7 +17,7 @@ export default function Hero() {
       if (cancelled || !mount) return;
 
       const canvas = document.createElement("canvas");
-      canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%";
+      canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;outline:none;border:none;display:block";
       mount.appendChild(canvas);
 
       const W = mount.clientWidth || window.innerWidth;
@@ -129,7 +129,7 @@ export default function Hero() {
       <div className="absolute -top-16 -left-16 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-green-500/20 blur-[80px] pointer-events-none" style={{ animation: "morphBlob 10s ease-in-out infinite" }} />
       <div className="absolute bottom-0 right-0 w-56 sm:w-80 h-56 sm:h-80 rounded-full bg-emerald-700/15 blur-[80px] pointer-events-none" style={{ animation: "morphBlob 14s 3s ease-in-out infinite" }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16 lg:py-0 lg:min-h-screen lg:flex lg:items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-24 pb-16 lg:pt-20 lg:pb-0 lg:min-h-screen lg:flex lg:items-center">
 
         {/* ── MOBILE layout: single column, image between heading & buttons ── */}
         <div className="flex flex-col gap-5 w-full lg:hidden">
@@ -147,7 +147,7 @@ export default function Hero() {
           {/* Image — right after heading */}
           <div className="relative w-full h-48 sm:h-60 rounded-3xl overflow-hidden border border-white/10 shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&q=85&fit=crop"
+              src="/images/atas.png"
               alt="Jamur Tiram Segar"
               className="w-full h-full object-cover block"
               loading="eager"
@@ -232,7 +232,7 @@ export default function Hero() {
           <div className="relative" style={{ animation: "fadeUp 1s 0.2s cubic-bezier(0.16,1,0.3,1) both" }}>
             <div className="relative w-full max-w-md ml-auto">
               <div className="w-full h-[480px] xl:h-[520px] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl shadow-black/50 relative" style={{ animation: "floatY 5s ease-in-out infinite" }}>
-                <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&q=85&fit=crop" alt="Jamur Tiram Segar" className="w-full h-full object-cover block" loading="eager" />
+                <img src="/images/atas.png" alt="Jamur Tiram Segar" className="w-full h-full object-cover block" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
               </div>
               <div className="absolute -left-12 bottom-16 bg-black/70 backdrop-blur-xl border border-white/15 rounded-2xl p-4 shadow-xl" style={{ animation: "floatY 5s 1s ease-in-out infinite" }}>

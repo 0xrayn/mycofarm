@@ -59,9 +59,10 @@ export default function Budidaya() {
         {/* CTA Banner */}
         <div className="mt-16 rounded-3xl overflow-hidden relative">
           <img
-            src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=75&fit=crop"
+            src="/images/atas4.png"
             alt="Kebun"
             className="absolute inset-0 w-full h-full object-cover opacity-20"
+            loading="lazy"
           />
           <div className="relative z-10 bg-gradient-to-r from-green-900/80 to-emerald-800/60 p-10 lg:p-14">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">

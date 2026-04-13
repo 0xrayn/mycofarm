@@ -8,10 +8,10 @@ const BENEFITS = [
 ];
 
 const IMGS = [
-  { src: "https://images.unsplash.com/photo-1611069955545-12ab11e75e99?w=400&q=80&fit=crop", alt: "Kebun jamur",   h: "h-56" },
-  { src: "https://images.unsplash.com/photo-1602491674275-316d95560fb1?w=400&q=80&fit=crop", alt: "Baglog jamur",  h: "h-36" },
-  { src: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=400&q=80&fit=crop",   alt: "Masakan jamur", h: "h-36" },
-  { src: "https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?w=400&q=80&fit=crop", alt: "Jamur segar",   h: "h-56" },
+  { src: "/images/atas2.png",  alt: "Kebun jamur",   h: "h-56" },
+  { src: "/images/baglog.png", alt: "Baglog jamur",  h: "h-36" },
+  { src: "/images/abonjamur.png", alt: "Masakan jamur", h: "h-36" },
+  { src: "/images/atas3.png",  alt: "Jamur segar",   h: "h-56" },
 ];
 
 export default function About() {

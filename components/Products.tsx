@@ -15,7 +15,7 @@ const SEGAR = [
     desc: "Segar dipanen subuh. Tekstur lembut bersih, rasa gurih alami. Cocok untuk semua masakan.",
     price: "Rp 15.000", unit: "/kg", priceClass: "text-success",
     btnClass: "bg-success text-success-content",
-    img: "https://images.unsplash.com/photo-1549781568-eb67ed0da6a9?w=500&q=80&fit=crop",
+    img: "/images/jamurtiramputih.png",
     waText: "Halo!%20Mau%20pesan%20Jamur%20Tiram%20Putih%20segar.",
   },
   {
@@ -23,7 +23,7 @@ const SEGAR = [
     desc: "Golden Oyster Mushroom — warna menawan, aroma harum khas. Pilihan chef restoran bintang.",
     price: "Rp 25.000", unit: "/kg", priceClass: "text-warning",
     btnClass: "bg-warning text-warning-content",
-    img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=500&q=80&fit=crop",
+    img: "/images/jamurtiramkuning.png",
     waText: "Halo!%20Mau%20pesan%20Jamur%20Tiram%20Kuning.",
   },
   {
@@ -31,7 +31,7 @@ const SEGAR = [
     desc: "Pink Oyster Mushroom — eksotis dan visual menawan. Rasa ringan manis, tampilan memukau.",
     price: "Rp 35.000", unit: "/kg", priceClass: "text-secondary",
     btnClass: "bg-secondary text-secondary-content",
-    img: "https://images.unsplash.com/photo-1634467524884-897d0af5e104?w=500&q=80&fit=crop",
+    img: "/images/jamurtirampink.png",
     waText: "Halo!%20Mau%20pesan%20Jamur%20Tiram%20Pink.",
   },
 ];
@@ -42,7 +42,7 @@ const BAGLOG = [
     desc: "Miselium sudah penuh, siap mengeluarkan pin head dalam 7–14 hari. Cocok untuk pemula.",
     price: "Rp 7.500", unit: "/pcs", priceClass: "text-success",
     btnClass: "bg-success text-success-content",
-    img: "https://images.unsplash.com/photo-1602491674275-316d95560fb1?w=500&q=80&fit=crop",
+    img: "/images/baglog.png",
     waText: "Mau%20pesan%20baglog%20siap%20panen.",
   },
   {
@@ -50,7 +50,7 @@ const BAGLOG = [
     desc: "Baru inokulasi, perlu 30–45 hari inkubasi. Lebih ekonomis, media segar = panen lebih banyak.",
     price: "Rp 5.000", unit: "/pcs", priceClass: "text-info",
     btnClass: "bg-info text-info-content",
-    img: "https://images.unsplash.com/photo-1605731956256-4e77a22b8d85?w=500&q=80&fit=crop",
+    img: "/images/baglogfresh.png",
     waText: "Mau%20pesan%20baglog%20fresh.",
   },
   {
@@ -58,16 +58,16 @@ const BAGLOG = [
     desc: "50 baglog siap panen + panduan lengkap + konsultasi gratis. Sempurna untuk mulai usaha.",
     price: "Rp 350.000", unit: "/paket", priceClass: "text-success",
     btnClass: "bg-success text-success-content",
-    img: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&q=80&fit=crop",
+    img: "/images/staterpack.png",
     waText: "Mau%20pesan%20Starter%20Kit%20Jamur%20Tiram.",
   },
 ];
 
 const OLAHAN = [
-  { title: "Keripik Jamur", sub: "Renyah, gurih, halal", price: "Rp 25.000", unit: "/200g", priceClass: "text-success", btnClass: "bg-success/15 text-success hover:bg-success hover:text-success-content", img: "https://images.unsplash.com/photo-1621447504864-d8686e12698c?w=400&q=80&fit=crop", waText: "Mau%20pesan%20Keripik%20Jamur%20Tiram." },
-  { title: "Abon Jamur", sub: "Kaya protein, rendah kalori", price: "Rp 35.000", unit: "/150g", priceClass: "text-warning", btnClass: "bg-warning/15 text-warning hover:bg-warning hover:text-warning-content", img: "https://images.unsplash.com/photo-1611069955502-a3a54f5f7b74?w=400&q=80&fit=crop", waText: "Mau%20pesan%20Abon%20Jamur%20Tiram." },
-  { title: "Nugget Jamur", sub: "Frozen, siap goreng", price: "Rp 30.000", unit: "/250g", priceClass: "text-error", btnClass: "bg-error/15 text-error hover:bg-error hover:text-error-content", img: "https://images.unsplash.com/photo-1606851091851-e8c8c0fca5ba?w=400&q=80&fit=crop", waText: "Mau%20pesan%20Nugget%20Jamur%20Tiram." },
-  { title: "Sate Jamur", sub: "Bumbu kacang & kecap", price: "Rp 20.000", unit: "/pack", priceClass: "text-secondary", btnClass: "bg-secondary/15 text-secondary hover:bg-secondary hover:text-secondary-content", img: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80&fit=crop", waText: "Mau%20pesan%20Sate%20Jamur%20Tiram." },
+  { title: "Keripik Jamur", sub: "Renyah, gurih, halal", price: "Rp 25.000", unit: "/200g", priceClass: "text-success", btnClass: "bg-success/15 text-success hover:bg-success hover:text-success-content", img: "/images/keripikjamur.png", waText: "Mau%20pesan%20Keripik%20Jamur%20Tiram." },
+  { title: "Abon Jamur", sub: "Kaya protein, rendah kalori", price: "Rp 35.000", unit: "/150g", priceClass: "text-warning", btnClass: "bg-warning/15 text-warning hover:bg-warning hover:text-warning-content", img: "/images/abonjamur.png", waText: "Mau%20pesan%20Abon%20Jamur%20Tiram." },
+  { title: "Nugget Jamur", sub: "Frozen, siap goreng", price: "Rp 30.000", unit: "/250g", priceClass: "text-error", btnClass: "bg-error/15 text-error hover:bg-error hover:text-error-content", img: "/images/atas5.png", waText: "Mau%20pesan%20Nugget%20Jamur%20Tiram." },
+  { title: "Sate Jamur", sub: "Bumbu kacang & kecap", price: "Rp 20.000", unit: "/pack", priceClass: "text-secondary", btnClass: "bg-secondary/15 text-secondary hover:bg-secondary hover:text-secondary-content", img: "/images/atas6.png", waText: "Mau%20pesan%20Sate%20Jamur%20Tiram." },
 ];
 
 function ProductCard({ p, size = "lg" }: { p: any; size?: "lg" | "sm" }) {
@@ -76,7 +76,7 @@ function ProductCard({ p, size = "lg" }: { p: any; size?: "lg" | "sm" }) {
       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-[inherit]" />
       <div className={`${size === "lg" ? "h-60" : "h-44"} overflow-hidden bg-base-200`}>
         {p.img ? (
-          <img src={p.img} alt={p.title} className={`w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700`} />
+          <img src={p.img} alt={p.title} className={`w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700`} loading="lazy" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-6xl">{p.emoji || "🍄"}</div>
         )}

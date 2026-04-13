@@ -102,7 +102,7 @@ export default function Navbar() {
   const showBg = scrolled || !isHome;
   const navBg = showBg
     ? "bg-base-100/90 backdrop-blur-2xl shadow-sm border-b border-base-300/50"
-    : "bg-transparent";
+    : "bg-transparent border-b border-transparent";
 
   // Text colors adapt to whether we're on transparent or opaque bg + theme
   const linkColor = showBg
@@ -135,14 +135,14 @@ export default function Navbar() {
               <ellipse cx="20" cy="36" rx="6" ry="2.5" fill="#166534" opacity=".4" />
             </svg>
           </div>
-          <div>
+          <div className="flex flex-col justify-center gap-[2px]">
             <div
-              className={`font-bold text-base sm:text-lg leading-none transition-colors ${showBg ? "text-base-content" : "text-white"}`}
+              className={`font-bold text-base sm:text-lg leading-tight transition-colors ${showBg ? "text-base-content" : "text-white"}`}
               style={{ fontFamily: "'Cormorant Garamond', serif", letterSpacing: "0.02em" }}
             >
               MycoFarm
             </div>
-            <div className="text-[10px] sm:text-xs text-green-400 leading-none opacity-70">Malang · Est. 2019</div>
+            <div className="text-[10px] sm:text-xs text-green-400 leading-tight opacity-70">Malang · Est. 2019</div>
           </div>
         </Link>
 

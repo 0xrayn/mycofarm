@@ -20,9 +20,10 @@ export default function Page() {
       <div className="grid lg:grid-cols-2 gap-16 items-start">
         <div className="rounded-3xl overflow-hidden border border-white/10 aspect-square">
           <img
-            src="https://images.unsplash.com/photo-1602491674275-316d95560fb1?w=900&q=85&fit=crop"
+            src="/images/baglog.png"
             alt="Baglog Siap Panen"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         </div>
         <div className="lg:sticky lg:top-24">
